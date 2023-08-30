@@ -1,0 +1,54 @@
+{% extends 'notebook/base2.html' %}
+
+{% block content %}
+<h1>BSC.CSIT</h1>
+<div class="row">
+
+  <center>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          {% for i in itnote %}
+          Download Syllabus:   <a href="{{i.syllabus.url}}" >{{i.syllabus}}</a>
+          <p class="card-text"><small class="text-muted">Upload Date: {{i.syllabuspublishdate}}</small></p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </center>
+
+</div>
+<div class="row">
+  {% for i in itnote %}
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{i.cname}}(Note)</h3>
+        <p class="card-text">Year: {{i.year}}    Semester: {{i.semester}}</p>
+        <h5 class="card-title">Subject: {{i.subject}}</h5>
+        Download Link:   <a href="{{i.note.url}}" >{{i.note}}</a>
+        <p class="card-text">Author: {{i.writer}}</p>
+        <p class="card-text">Details: {{i.shortdetail}}</p>
+        <p class="card-text"><small class="text-muted">Upload Date: {{i.notepublishdate}}</small></p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row">
+  {% for i in itnote %}
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{i.cname}} (Old Question)</h3>
+        <p class="card-text">Year: {{i.year}}    Semester: {{i.semester}}</p>
+        <h5 class="card-title">Subject: {{i.subject}}</h5>
+        Download Old Question:   <a href="{{i.oldquestion.url}}" >{{i.oldquestion}}</a>
+        <p class="card-text"><small class="text-muted">Upload Date: {{i.oldquestionyear}}</small></p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'notebook/base2.html' %}
+
+{% block content %}
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+        {{error.label_tag}} {{error}} {{error.errors|striptags}}
+    {% endfor %}
+{% endif %} 
+    <h1 class="m-5">Registration Form</h1>
+    <p class=" m-5">If you are new user first fillup the registration Form to login</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form" >
+                <form class="p-5" action="" method="POST" novalidate>
+                    {% csrf_token %}
+                    {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
+                    {% endfor %}<br>
+                    <input class="btn btn-info" type="submit" value="SignIn"><br>
+                    <p>Already have Accoubt? <a class="btn btn-info" href="{% url 'loginpage' %}">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

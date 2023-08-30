@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>NoteBook</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static 'notebook/css/all.min.css' %}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static 'notebook/css/bootstrap.css' %}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static 'notebook/css/fontawesome.min.css' %}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static 'notebook/css/style.css' %}'>
+
+    <script src='{% static 'notebook/js/all.min.js' %}'>
+    </script>
+    <script src='{% static 'notebook/js/bootstrap.js' %}'>
+    </script>
+    <script src='{% static 'notebook/js/fontawesome.min.js' %}'>
+    </script>
+    <script src='{% static 'notebook/js/jquery.js' %}'>
+    </script>
+    <script src='{% static 'notebook/js/main.js' %}'>
+    </script>
+    <script src='{% static 'notebook/js/popper.js' %}'>
+    </script>
+
+</head>
+<body>
+    <div class="superNav border-bottom py-2 bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+              <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong>lokendrathapa056@gmail.com</strong></span>
+              <span class="me-3"><i class="fa-solid fa-phone me-1 text-warning"></i> <strong>9842291418</strong></span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-none d-lg-block d-md-block-d-sm-block d-xs-none text-end">
+                {% if request.user.is_authenticated %}
+                    <span class="me-3"><i class="fa-solid fa-arrow-up-left-from-circle"></i><a class="text-muted" href="{% url 'logoutpage' %}">Logout</a></span>
+                {% endif %}
+              <span class="me-3"><i class="fa-solid fa-file  text-muted me-2"></i><a class="text-muted" href="#">Policy</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'homepage' %}"><i class="fa-solid fa-copy me-2"></i> <strong>NOTE BOOK</strong></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+            <div class="input-group">
+              <span class="border-warning input-group-text bg-warning text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+              <button class="btn btn-warning text-white">Search</button>
+            </div>
+          </div>
+          <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="ms-auto d-none d-lg-block">
+              <div class="input-group">
+                <span class="border-warning input-group-text bg-warning text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+                <button class="btn btn-warning text-white">Search</button>
+              </div>
+            </div>
+            <ul class="navbar-nav ms-auto ">
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'homepage' %}">Cources</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="#">About</a>
+              </li>
+              {% if request.user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'noteform' %}">Upload Note</a>
+              </li>
+              {% endif %}
+            {% if request.user.is_authenticated %}
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase" href="{% url 'profilepage' %}"><i class="fa-solid fa-circle-user me-1"></i>{{request.user}}</a>
+                    </li>
+                </ul>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'registrationpage' %}">SignIn</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link mx-2 text-uppercase" href="{% url 'loginpage' %}">LogIn</a>
+                </li>
+            {% endif %}
+            
+          </div>
+        </div>
+      </nav>
+
+      <div id="hero" style="background:url('/static/notebook/images/travel.jpg') no-repeat;background-size:cover;background-position:top center">
+        <h1 class="display-3 text-center text-white greatVibesFont" style="padding-top:45vh;padding-bottom:85vh;text-shadow : 0px 3px 4px rgba(0,0,0,0.8)">
+          Adventure Unlimited. Explore the West
+        </h1>
+      </div>
+    
+      <!--card page-->
+      <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BSC.CSIT</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bsccsitpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BSC</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bscpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BBA</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bbapage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BCA</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bcapage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BBS</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bbspage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">BIT</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bitpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">B.ED</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'bedpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">B.TECH</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'btechpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">+2 SCIENCE</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'sciencepage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">+2 MANAGEMENT</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'managementpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp"
+                alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+      
+            <!--Card content-->
+            <div class="card-body">
+      
+              <!--Title-->
+              <h4 class="card-title">+2 EDUCATION</h4>
+              <!--Text-->
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a class="btn btn-primary" href="{% url 'educationpage' %}">View</a>
+            </div>
+      
+          </div>
+          <!-- Card -->
+        </div>
+      </div>
+    
+    
+    
+    
+        <footer class="text-center text-lg-start" style="background-color: #ccbfb5;">
+          <div class="container d-flex justify-content-center py-5">
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #6ece66;">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #6ece66;">
+              <i class="fab fa-youtube"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color:  #6ece66;">
+              <i class="fab fa-instagram"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color:  #6ece66;">
+              <i class="fab fa-linkedin-in"></i>
+            </button>
+          </div>
+      
+          <!-- Copyright -->
+          <div class="text-center text-white p-3" style="background-color: rgb(143, 165, 185);">
+            © 2023 Copyright:
+            <a class="text-white" href="">Lokendra Thapa</a>
+          </div>
+          <!-- Copyright -->
+        </footer>
+    {% block content %}
+    
+    {% endblock content %}
+</body>
+</html>
